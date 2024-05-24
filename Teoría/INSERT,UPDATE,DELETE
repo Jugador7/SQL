@@ -1,0 +1,30 @@
+INSERT INTO table_name (column1, column2, ... )
+VALUES (value1, value2, ... )
+;
+
+Example: 
+INSERT INTO Instructor(ins_id, lastname, firstname, city, country)
+VALUES(5, 'Doe', 'John', 'Sydney', 'AU'), (6, 'Doe', 'Jane', 'Dhaka', 'BD');
+
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition
+;
+
+Examples:
+UPDATE Instructor 
+SET city='Toronto' 
+WHERE firstname="Sandip";
+
+UPDATE Instructor 
+SET city='Dubai', country='AE' 
+WHERE ins_id=5;
+
+DELETE FROM table_name
+WHERE condition
+;
+
+Example: 
+
+DELETE FROM instructor
+WHERE ins_id = 6;
