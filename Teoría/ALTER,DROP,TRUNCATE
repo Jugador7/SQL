@@ -1,0 +1,18 @@
+ALTER TABLE table_name
+ADD column_name data_type;
+
+ALTER TABLE table_name
+ADD COLUMN column_name data_type;
+
+ALTER TABLE author 
+ADD telephone_number BIGINT;
+
+ALTER TABLE table_name
+MODIFY column_name data_type;
+
+ALTER TABLE author
+MODIFY telephone_number CHAR(20);
+
+TRUNCATE TABLE table_name;
+
+TRUNCATE TABLE author;
