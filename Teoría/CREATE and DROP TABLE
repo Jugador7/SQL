@@ -1,1 +1,33 @@
+CREATE TABLE TableName (
+   COLUMN1 datatype,
+   COLUMN2 datatype,
+   COLUMN3 datatype, 
+   ...
+);
 
+CREATE TABLE TEST (
+   ID int,
+   NAME varchar(30)
+);
+
+CREATE TABLE TEST (
+   ID int,
+   NAME varchar(30)
+);
+
+CREATE TABLE COUNTRY (
+   ID int NOT NULL,
+   CCODE char(2),
+   Name varchar(60)
+   PRIMARY KEY (ID)
+);
+
+DROP TABLE TableName;
+
+DROP TABLE COUNTRY;
+CREATE TABLE COUNTRY (
+   ID int NOT NULL,
+   CCODE char(2),
+   Name varchar(60)
+   PRIMARY KEY (ID)
+);
