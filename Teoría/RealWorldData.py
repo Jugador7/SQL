@@ -79,6 +79,14 @@ LIMIT 5
 
 ##### Get the hardship index for the community area which has the highest value for College Enrollment
 
-%sql select community_area_number, community_area_name, hardship_index from CENSUS_DATA \
-   where community_area_number in \
-   ( select community_area_number from CHICAGO_PUBLIC_SCHOOLS_DATA order by college_enrollment desc limit 1 )
+%%sql
+SELECT community_area_name 
+FROM CHICAGO_CENSUS_DATA
+WHERE community_area_number = (
+    SELECT community_area_number 
+    FROM CHICAGO_CRIME_DATA 
+    GROUP BY community_area_number
+    ORDER BY COUNT(community_area_number) DESC
+    LIMIT 1
+)
+LIMIT 1;
