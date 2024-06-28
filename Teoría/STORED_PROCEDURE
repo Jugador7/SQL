@@ -1,8 +1,36 @@
+This RETRIEVE_ALL routine will contain an SQL query to retrieve all the records from the PETSALE table, so you don't need to write the same query over and over again. You just call the stored procedure routine to execute the query everytime.
+To create the stored procedure routine, copy the code below and paste it to the textarea of the SQL page. Click Go.
+
 DELIMITER //
-
 CREATE PROCEDURE RETRIEVE_ALL()
-
 BEGIN
    SELECT *  FROM PETSALE;
 END //
 DELIMITER ;
+
+DELIMITER @
+CREATE PROCEDURE UPDATE_SALEPRICE (IN Animal_ID INTEGER, IN Animal_Health VARCHAR(5))
+BEGIN
+    IF Animal_Health = 'BAD' THEN
+        UPDATE PETSALE
+        SET SALEPRICE = SALEPRICE - (SALEPRICE * 0.25)
+        WHERE ID = Animal_ID;
+    ELSEIF Animal_Health = 'WORSE' THEN
+        UPDATE PETSALE
+        SET SALEPRICE = SALEPRICE - (SALEPRICE * 0.5)
+        WHERE ID = Animal_ID;
+    ELSE
+        UPDATE PETSALE
+        SET SALEPRICE = SALEPRICE
+        WHERE ID = Animal_ID;
+    END IF;
+END @
+DELIMITER ;
+
+ CALL RETRIEVE_ALL;
+   CALL UPDATE_SALEPRICE(1, 'BAD');
+   CALL RETRIEVE_ALL;
+
+ CALL RETRIEVE_ALL;
+   CALL UPDATE_SALEPRICE(3, 'WORSE');
+   CALL RETRIEVE_ALL;
