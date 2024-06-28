@@ -10,3 +10,10 @@ LEFT OUTER JOIN chicago_socioeconomic_data AS D
 ON C.COMMUNITY_AREA_NUMBER = D.COMMUNITY_AREA_NUMBER 
 WHERE C.LOCATION_DESCRIPTION LIKE "%SCHOOL%";
 
+CREATE OR REPLACE VIEW PublicSchools AS
+SELECT NAME_OF_SCHOOL AS School_Name, Safety_Icon AS Safety_Rating, Family_Involvement_Icon	AS Family_Rating,
+Environment_Icon AS	Environment_Rating, Instruction_Icon AS	Instruction_Rating, Leaders_Icon AS	Leaders_Rating,
+Teachers_Icon AS Teachers_Rating
+FROM chicago_public_schools;
+
+SELECT School_Name, Leaders_Rating FROM `PublicSchools`;
