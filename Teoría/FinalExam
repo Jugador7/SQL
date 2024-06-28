@@ -17,3 +17,37 @@ Teachers_Icon AS Teachers_Rating
 FROM chicago_public_schools;
 
 SELECT School_Name, Leaders_Rating FROM `PublicSchools`;
+
+DELIMITER //
+
+CREATE PROCEDURE UPDATE_LEADERS_SCORE (IN in_School_ID INT, IN in_Leaders_Score INT)
+BEGIN
+    UPDATE Leaders_Score
+    SET Leaders_Score = in_Leaders_Score
+    WHERE School_ID = in_School_ID;
+
+    IF in_Leaders_Score > 0 AND in_Leaders_Score < 20 THEN
+        UPDATE Leaders_Icon
+        SET Leaders_Icon = 'Very Weak'
+        WHERE School_ID = in_School_ID;
+    ELSEIF in_Leaders_Score < 40 THEN
+        UPDATE Leaders_Icon
+        SET Leaders_Icon = 'Weak'
+        WHERE School_ID = in_School_ID;
+    ELSEIF in_Leaders_Score < 60 THEN
+        UPDATE Leaders_Icon
+        SET Leaders_Icon = 'Average'
+        WHERE School_ID = in_School_ID;
+    ELSEIF in_Leaders_Score < 80 THEN
+        UPDATE Leaders_Icon
+        SET Leaders_Icon = 'Strong'
+        WHERE School_ID = in_School_ID;
+    ELSEIF in_Leaders_Score < 100 THEN
+        UPDATE Leaders_Icon
+        SET Leaders_Icon = 'Very Strong'
+        WHERE School_ID = in_School_ID;
+    END IF;
+END //
+
+DELIMITER ;
+
