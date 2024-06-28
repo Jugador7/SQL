@@ -20,6 +20,10 @@ SELECT School_Name, Leaders_Rating FROM `PublicSchools`;
 
 DELIMITER //
 
+-- Check if the procedure exists and drop it
+DROP PROCEDURE IF EXISTS UPDATE_LEADERS_SCORE //
+
+-- Create the new procedure
 CREATE PROCEDURE UPDATE_LEADERS_SCORE (IN in_School_ID INT, IN in_Leaders_Score INT)
 BEGIN
     UPDATE Leaders_Score
@@ -50,4 +54,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
