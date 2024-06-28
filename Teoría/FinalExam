@@ -23,7 +23,15 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS UPDATE_LEADERS_SCORE //
 
 CREATE PROCEDURE UPDATE_LEADERS_SCORE (IN in_School_ID INT, IN in_Leaders_Score INT)
-BEGIN
+main_block: BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Rollback the transaction if any error occurs
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
     UPDATE chicago_public_schools
     SET Leaders_Score = in_Leaders_Score
     WHERE School_ID = in_School_ID;
@@ -48,7 +56,13 @@ BEGIN
         UPDATE chicago_public_schools
         SET Leaders_Icon = 'Very Strong'
         WHERE School_ID = in_School_ID;
+    ELSE
+        -- Rollback the transaction if the score does not fit any category
+        ROLLBACK;
+        LEAVE main_block;
     END IF;
+
+    COMMIT;
 END //
 
 DELIMITER ;
